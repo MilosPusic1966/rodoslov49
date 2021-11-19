@@ -12,3 +12,11 @@ SELECT ID_mama FROM Osoba WHERE ID=
 (SELECT ID_tata FROM Osoba WHERE ID=1)
 )
 -- deca date osobe
+SELECT * FROM Osoba WHERE
+ID_tata = 8 OR ID_mama = 8
+
+-- braca i sestre date osobe
+SELECT * FROM Osoba WHERE ID_tata = 
+(SELECT ID_tata FROM Osoba WHERE ID=8)
+AND NOT ID=8
+
