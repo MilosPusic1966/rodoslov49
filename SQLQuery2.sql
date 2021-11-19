@@ -48,6 +48,27 @@ WHERE ID_tata = @ID OR ID_mama = @ID
 SELECT * FROM Osoba WHERE ID IN 
 (SELECT * FROM dbo.Deca(8))
 
--- domaci: unuci date osobe
-SELECT * FROM dbo.Deca(dete) JOIN 
-SELECT ID as dete FROM dbo.Deca(13)
+-- domaci: unuci date osobe - Panjevac
+SELECT ID FROM Osoba WHERE ID_tata IN
+(SELECT ID FROM dbo.Deca(13)) 
+OR
+ID_mama IN
+(SELECT ID FROM dbo.Deca(13)) 
+
+
+UPDATE Osoba 
+SET Pol='m' WHERE ID IN 
+(SELECT DISTINCT id_tata FROM Osoba) 
+ 
+CREATE PROCEDURE sredi
+AS
+BEGIN
+UPDATE Osoba 
+SET Pol='m' WHERE ID IN 
+(SELECT DISTINCT id_tata FROM Osoba) 
+UPDATE Osoba 
+SET Pol='z' WHERE ID IN 
+(SELECT DISTINCT id_mama FROM Osoba) 
+END
+
+EXEC dbo.sredi
