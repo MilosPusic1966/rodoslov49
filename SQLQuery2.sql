@@ -71,4 +71,11 @@ SET Pol='z' WHERE ID IN
 (SELECT DISTINCT id_mama FROM Osoba) 
 END
 
-EXEC dbo.sredi
+EXEC sredi
+
+-- anini ujaci
+-- baba = roditelj(roditelj(1, z), z)
+-- deca(baba) and pol=m
+SELECT * FROM Osoba WHERE ID IN 
+(SELECT * FROM dbo.Deca(dbo.roditelj(dbo.roditelj(1, 'z'), 'z')))
+AND pol='m'
